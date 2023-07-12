@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../../src/asserts/LOGO/logo.png";
+// import logo from "../../src/asserts/LOGO/logo.;
 import { CgMenu } from "react-icons/cg";
 import "./NavbarD2.scss";
 
