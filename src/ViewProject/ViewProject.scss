@@ -1,0 +1,67 @@
+.ViewProject {
+  .Project {
+    width: 100vw;
+    height: 80vh;
+    background: var(--body-color);
+    margin-bottom: 2rem;
+
+    .Project-overlay {
+      width: 100vw !important;
+      height: 80vh !important;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+
+      .ProjectHead {
+        margin-left: 5rem !important;
+        width: 9rem !important;
+        font-size: 3rem !important;
+        border-bottom: 10px solid var(--primary-color);
+        letter-spacing: 2px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+
+    .card {
+      width: 300px;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .ViewProject {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+      padding: 0;
+    }
+  }
+}
+@media screen and (max-width: 760px) {
+  .ViewProject {
+    .Project {
+      height: 60vh;
+      .Project-overlay {
+        .ProjectHead {
+          margin-left: 0px !important;
+          margin-bottom: 10rem;
+          font-size: 2.5rem !important;
+        }
+      }
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      padding: 0;
+    }
+  }
+}

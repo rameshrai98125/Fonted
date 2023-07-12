@@ -1,0 +1,47 @@
+.BottomToTop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .top-btn {
+    font-size: 2.4rem;
+    width: 2rem;
+    height: 2rem;
+    background: var(--body-color);
+    // box-shadow: ;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--primary-color);
+
+    .TopIcon {
+      color: var(--primary-color);
+      font-size: 1rem;
+      cursor: pointer;
+      animation: updown 1.2s infinite alternate-reverse;
+    }
+
+    @keyframes updown {
+      0% {
+        transform: translateY(-0.5rem);
+      }
+      100% {
+        transform: translateY(0.5rem);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .BottomToTop {
+    .top-btn {
+      bottom: 1rem;
+      right: 1rem;
+    }
+  }
+}

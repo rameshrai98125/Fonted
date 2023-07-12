@@ -1,0 +1,141 @@
+.warpper-footer {
+  width: 100%;
+}
+
+.contact-shot {
+  max-width: 60vw;
+  margin: auto;
+  padding: 2rem 5rem;
+  border: 1px solid black;
+  border-radius: 1rem;
+  background: var(--white-color);
+
+  // box-shadow: ;
+  transform: translateY(50%);
+
+  .grid div:last-child {
+    justify-self: end;
+    align-self: center;
+  }
+  .ContShotHeading {
+    color: var(--body-color) !important;
+  }
+}
+
+.footer-container {
+  padding: 10rem 4rem;
+  background: var(--primary-color);
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem !important;
+
+  .footer-about {
+    padding: 10px;
+
+    > h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem !important;
+      color: var(--white-color);
+      display: inline-block;
+      // align-items: center;
+      // padding: 2px;
+    }
+
+    > p {
+      letter-spacing: 2px;
+    }
+
+    .footer-menu {
+      display: flex;
+      justify-content: space-evenly;
+      flex-direction: column;
+    }
+
+    .footer-link {
+      // margin-top: 2rem;
+      a {
+        color: var(--white-color);
+        padding: 10px;
+        font-size: 1.8rem;
+        // margin: 2px;
+
+        .footer-link-icon {
+          padding: 5px;
+          border-radius: 42%;
+          transition: all 0.5s ease;
+          &:hover {
+            background: var(--white-color);
+            color: var(--primary-color);
+            transform: scale(1.2);
+          }
+        }
+      }
+    }
+  }
+}
+
+.Footer-bottom {
+  .grid-two-column {
+    grid-template-columns: repeat(2, 2fr);
+  }
+  .bottom-footer-div {
+    display: flex;
+    gap: 10px;
+  }
+}
+
+// media 768px
+
+@media screen and (max-width: 768px) {
+  .contact-shot {
+    max-width: 60vw;
+    margin: auto;
+    padding: 1rem 2rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    background: var(--white-color);
+    display: none;
+
+    // box-shadow: ;
+    transform: translateY(50%);
+
+    .grid div:last-child {
+      justify-self: end;
+      align-self: center;
+    }
+  }
+
+  .footer-container {
+    padding: 10rem 0.5rem;
+    grid-template-columns: 1fr;
+
+    .footer-about {
+      .footer-link {
+        a {
+          padding: 6px;
+        }
+      }
+    }
+  }
+}
+// media 1050px
+
+@media screen and (max-width: 1050px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+// media 1050px
+
+@media screen and (max-width: 768px) {
+  warpper {
+    .contact-shot {
+      display: none;
+    }
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}
