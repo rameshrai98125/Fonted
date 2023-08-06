@@ -3,7 +3,7 @@ import React from "react";
 import Carousel2 from "../Carousel/Carousel";
 import Hero from "../Hero/Hero";
 import "./Home.scss";
-import Gallery from "../gallery/Gallery";
+import Gallery1 from "../gallery/Gallery1";
 import Team from "../team/Team";
 import TagLine from "../TagLine/TagLine";
 import HeaderSwiper from "../Headerswiper/HeaderSwiper";
@@ -15,8 +15,9 @@ function Home() {
       {/* <ViewSlider /> */}
       <TagLine />
       <HeaderSwiper />
-      <Gallery />
-      <Team />
+      {/* <Gallery />  */}
+      <Gallery1 />
+      {/* <Team /> */}
     </div>
   );
 }

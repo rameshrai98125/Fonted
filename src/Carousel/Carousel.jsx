@@ -2,61 +2,66 @@ import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "./Carsusel1.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import { axiosClient } from "../utils/axiosClient";
+import { axiosClient } from "../utils/axiosClient";
+
+import LoadingBar from "../Loading/Loading";
 
 function Carousel1() {
-  const carouselImag = [
-    {
-      id: 1,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688057044/01_4fc209b5c1.jpg",
-    },
-    {
-      id: 2,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688057018/2_ZA_1_4dc06af209.jpg",
-    },
-    {
-      id: 3,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688057028/final_plan_dde16a89af.jpg",
-    },
-    {
-      id: 4,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688056865/67301606_1312789488890681_1410642881219133440_o_b0d2225acd.jpg",
-    },
-  ];
-  // const [carousel, setCarousel] = useState(null);
+  const [carouselImages, setCarouselImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // State variable to track loading status
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-  // async function fetchData() {
-  //   try {
-  //     const carData = await axiosClient.get("carousel1s?populate=*");
-  //     setCarousel(carData.data.attributes.image.url);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axiosClient.get("/carousel1s?populate=*");
+        const fetchedImages = response.data.data;
 
-  //   // setCarousel(data.data.attributes.image, url);
-  // }
+        const imageUrls = fetchedImages.map((image) => {
+          if (
+            image.attributes &&
+            image.attributes.image &&
+            image.attributes.image.data &&
+            image.attributes.image.data[0] &&
+            image.attributes.image.data[0].attributes &&
+            image.attributes.image.data[0].attributes.url
+          ) {
+            return image.attributes.image.data[0].attributes.url;
+          } else {
+            return null;
+          }
+        });
+
+        setCarouselImages(imageUrls.filter((url) => url !== null));
+        setIsLoading(false); // Set loading to false once data is fetched
+      } catch (error) {
+        console.log("Error fetching image data:", error);
+        setIsLoading(false); // Set loading to false in case of an error
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <div className="Carousel">
-      <Carousel
-        infiniteLoop
-        autoPlay
-        showStatus={false}
-        showArrows={false}
-        interval={2000}
-        showThumbs={false}
-      >
-        {carouselImag.map((item) => {
-          return (
-            <div key={item.id} className="box">
-              <img src={item.url} alt="item2" />
+      {isLoading ? ( // Render the loading bar if data is still loading
+        <LoadingBar />
+      ) : (
+        <Carousel
+          infiniteLoop
+          autoPlay
+          showStatus={false}
+          showArrows={false}
+          interval={2000}
+          showThumbs={false}
+        >
+          {carouselImages.map((imageUrl, index) => (
+            <div key={index} className="box">
+              <img src={imageUrl} alt={`item${index}`} />
             </div>
-          );
-        })}
-      </Carousel>
+          ))}
+        </Carousel>
+      )}
     </div>
   );
 }

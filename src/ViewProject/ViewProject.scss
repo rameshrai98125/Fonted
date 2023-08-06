@@ -2,7 +2,11 @@
   .Project {
     width: 100vw;
     height: 80vh;
-    background: var(--body-color);
+
+    background: url("https://images.pexels.com/photos/5011647/pexels-photo-5011647.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100%;
     margin-bottom: 2rem;
 
     .Project-overlay {
@@ -26,12 +30,18 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    gap: 3rem;
 
     .card {
       width: 300px;
     }
   }
+}
+
+.ant-image-img {
+  // height: 400px;
+  object-fit: contain;
+  color: red;
 }
 
 @media screen and (max-width: 1200px) {
@@ -41,6 +51,7 @@
       gap: 1rem;
       padding: 1rem;
       padding: 0;
+      margin-left: 0 2rem;
     }
   }
 }
@@ -48,7 +59,9 @@
   .ViewProject {
     .Project {
       height: 60vh;
+
       .Project-overlay {
+        height: 60vh !important;
         .ProjectHead {
           margin-left: 0px !important;
           margin-bottom: 10rem;
@@ -62,6 +75,10 @@
       gap: 1rem;
       padding: 1rem;
       padding: 0;
+      margin-left: 0;
+    }
+    .card {
+      margin: 1rem 8px;
     }
   }
 }

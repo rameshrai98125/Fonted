@@ -13,7 +13,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0px;
+    gap: 10px;
     align-content: space-between;
 
     .card {
@@ -56,20 +56,47 @@
   }
 }
 
-// media 1050px
-@media screen and (max-width: 1050px) {
+@media (max-width: 640px) {
   .gallery {
+    // .container {
+    //   max-width: 100%;
+    // }
     .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-}
-
-// media 768px
-@media screen and (max-width: 768px) {
-  .gallery {
-    .grid {
+      display: grid;
       grid-template-columns: 1fr;
+      gap: 10px;
+      justify-content: center;
+      // margin-left: 2rem;
+
+      .card {
+        .Image-figure {
+          width: 528px;
+          > img {
+            width: 100%;
+          }
+        }
+      }
     }
   }
 }
+// media 768px
+// @media screen and (max-width: 768px) {
+//   .gallery {
+//     .grid {
+//       grid-template-columns: 1fr;
+//       // justify-content: center;
+//     }
+//     .card {
+//       width: 100%;
+//       height: 100%;
+//     }
+//   }
+// }
+// media 1050px
+// @media screen and (max-width: 1050px) {
+//   .gallery {
+//     .grid {
+//       grid-template-columns: repeat(2, 1fr);
+//     }
+//   }
+// }

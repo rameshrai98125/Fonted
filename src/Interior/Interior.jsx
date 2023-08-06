@@ -1,94 +1,54 @@
-// import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { axiosClient } from "../utils/axiosClient";
 import "./Interior.scss";
-// import images from "../../service.json";
-const Gallery = () => {
-  const images = [
-    {
-      id: 1,
+import AOS from "aos";
+import "aos/dist/aos.css";
 
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377530/00_cop_dcd2f2547b.jpg",
-    },
-    {
-      id: 2,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377526/1_65500e01f3.jpg",
-    },
-    {
-      id: 3,
+const Interior = () => {
+  const [galleries, setGalleries] = useState([]);
 
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377528/2_e71a3e18b6.jpg",
-    },
-    {
-      id: 4,
+  async function fetchData() {
+    try {
+      const response = await axiosClient.get("/interiors?populate=image");
+      const fetchedGalleries = response.data.data;
+      const galleryUrls = fetchedGalleries.map((gallery) => {
+        return gallery.attributes.image.data.attributes.url;
+      });
+      setGalleries(galleryUrls);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    AOS.init({ durations: 2000 });
+    AOS.refresh();
+  }, []);
 
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377531/3_8adc427a56.jpg",
-    },
-    {
-      id: 5,
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377527/4_064ed784a4.jpg",
-    },
-    {
-      id: 6,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377526/5_40df72c999.jpg",
-    },
-    {
-      id: 7,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377525/7_ed57600683.jpg",
-    },
-    {
-      id: 8,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377526/5_40df72c999.jpg",
-    },
-    {
-      id: 9,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688377531/9_fec52fb8e8.jpg",
-    },
-    {
-      id: 10,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688378220/4_d1ac25fa32.jpg",
-    },
-    {
-      id: 11,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688378228/22_5cab709acf.jpg",
-    },
-    {
-      id: 12,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688378230/15_a480286f0f.jpg",
-    },
-    {
-      id: 13,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688378229/20_e68c3adde2.jpg",
-    },
-    {
-      id: 14,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688403992/d5_1_5172e47d14.png",
-    },
-    {
-      id: 15,
-      url: "https://res.cloudinary.com/dhw7yagba/image/upload/v1688403955/d5_2_c6900ef624.png",
-    },
-  ];
   return (
     <div className="gallery">
-      <h4>Interior</h4>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <path
+          fill="#0099ff"
+          fill-opacity="1"
+          d="M0,288L0,32L1440,32L1440,0L0,0L0,0Z"
+        ></path>
+      </svg>
+      <h4 data-aos="fade-down">Interior</h4>
       <div className="container grid grid-three-column">
-        {images.map((currImg) => {
-          const { id, url } = currImg;
-          return (
-            <div key={id} className="card">
-              <figure className="Image-figure">
-                <img src={url} alt="cc" />
-              </figure>
-              {/* <div className="card-data">
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </div> */}
-            </div>
-          );
-        })}
+        {galleries.map((url, index) => (
+          <div key={index} className="card">
+            <figure data-aos="fade-down" className="Image-figure">
+              <img src={url} alt="cc" />
+            </figure>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
 
-export default Gallery;
+export default Interior;

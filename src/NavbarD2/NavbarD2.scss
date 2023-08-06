@@ -4,7 +4,6 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Poppins", sans-serif;
-  // background-color: var(--body-color);
 }
 
 .container {
@@ -27,11 +26,15 @@ body {
 .logo {
   .logo-menu {
     width: 100px;
-    height: 50px;
+    height: 80px;
+    height: 113px;
+    margin-bottom: 2rem;
+
     > img {
       width: 80%;
       height: 100%;
       object-fit: cover;
+      margin-bottom: 1rem;
     }
   }
 }
@@ -93,7 +96,7 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 950px) {
   .menu-icon {
     display: block;
     cursor: pointer;

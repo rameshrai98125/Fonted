@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./Contact.scss";
-
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { BsFillTelephonePlusFill } from "react-icons/bs";
 import { AiTwotoneMail } from "react-icons/ai";
 import { MdLocationOn } from "react-icons/md";
+import "./Contact.scss";
 
 const Contact = () => {
   const [name, setName] = useState("");
@@ -16,11 +16,17 @@ const Contact = () => {
     console.log("Name:", name);
     console.log("Email:", email);
     console.log("Message:", message);
-    toast.success("Message Send");
+    toast.success("Message Sent");
   };
 
   return (
-    <>
+    <motion.div
+      className="contact-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="contact-head">
         <div className="contact-overlay">
           <h1 className="contactHead">Contact</h1>
@@ -55,7 +61,7 @@ const Contact = () => {
                 <span>Address</span>
               </p>
               <p className="mailTo">
-                Opp. Ramlila Ground, Thana Road Ellenabad (Sirsa) , 125102
+                Opp. Ramlila Ground, Thana Road Ellenabad (Sirsa), 125102
               </p>
             </div>
           </div>
@@ -65,9 +71,15 @@ const Contact = () => {
             action="https://formspree.io/f/mdoroojy"
             method="POST"
             className="contact-form"
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
           >
-            <h2>Contact Us</h2>
+            <motion.h2
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              Contact Us
+            </motion.h2>
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input
@@ -100,7 +112,14 @@ const Contact = () => {
                 required
               ></textarea>
             </div>
-            <input className="button" type="submit" value="send" />
+            <motion.input
+              className="button"
+              type="submit"
+              value="Send"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              transition={{ duration: 0.2 }}
+            />
           </form>
         </div>
       </div>
@@ -116,7 +135,7 @@ const Contact = () => {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
-    </>
+    </motion.div>
   );
 };
 

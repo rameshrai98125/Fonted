@@ -25,6 +25,7 @@ function App() {
         <Route path={"/interior"} element={<Interior />} />
         <Route path={"/contact"} element={<Contact />} />
       </Routes>
+
       <Footer />
       <Toaster />
     </>

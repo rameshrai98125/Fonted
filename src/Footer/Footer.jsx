@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.scss";
 import { NavLink, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion"; // Import motion from framer-motion
 import {
   BsTelephoneForwardFill,
   BsInstagram,
@@ -9,14 +10,20 @@ import {
 } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 
-// import {
-//   AiOutlineInstagram,
-//   AiOutlineFacebook,
-//   AiFillTwitterSquare,
-// } from "react-icons/ai";
-
 function Footer() {
   const navigate = useNavigate();
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { duration: 0.5 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
     <>
       <div className="warpper-footer">
@@ -36,57 +43,68 @@ function Footer() {
 
         {/* footer  */}
 
-        <footer className="footer-container grid grid-four-column">
-          <div className="footer-about">
+        <motion.footer
+          className="footer-container grid grid-four-column"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div className="footer-about" variants={itemVariants}>
             <h3>Contact Details</h3>
             <div className="footer-menu">
               <p>
                 <BsTelephoneForwardFill />
-                <span>999154-44404</span>
+                <span> 99154-44404</span>
               </p>
               <p>
                 <MdEmail />
                 innovationhouzz@gmail.com
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="footer-about">
+          <motion.div className="footer-about" variants={itemVariants}>
             <h3>Follow Us</h3>
 
             <div className="footer-link">
               <a
                 href="https://www.facebook.com/profile.php?id=100064004016559"
-                target="blank"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <BsFacebook className="footer-link-icon" />
               </a>
-              <a href=" https://wa.me/919915444404" target="blank">
+              <a
+                href="https://wa.me/919915444404"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <BsWhatsapp className="footer-link-icon" />
               </a>
               <a
                 href="https://www.instagram.com/innovative_architecture_and_in/"
-                target="blank"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 <BsInstagram className="footer-link-icon" />
               </a>
             </div>
-          </div>
-          <div className="footer-about">
+          </motion.div>
+          <motion.div className="footer-about" variants={itemVariants}>
             <h3>Location</h3>
 
-            <p>Thana Road Near, Devi Lal Chowk Ellenabad,Sirsa, Haryana</p>
-          </div>
-        </footer>
+            <p>Opp. Ramlila Ground. Thana Road Ellenabad (Sirsa) 125102</p>
+          </motion.div>
+        </motion.footer>
 
         {/* Bottom footer  */}
 
         <div className="Footer-bottom">
           <hr />
           <div className="container grid-two-col">
-            <p>@{new Date().getFullYear()}Innovation. All rights reserved</p>
+            <p>@{new Date().getFullYear()} Innovation. All rights reserved</p>
             <div className="bottom-footer-div">
-              <p>Privacy Police </p>
+              <p>Privacy Policy</p>
               <p>Terms & Conditions</p>
             </div>
           </div>
