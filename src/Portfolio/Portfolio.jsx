@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./Portfolio.scss";
 import bgvideo from "../../src/asserts/portfolio/School.mp4";
 import { axiosClient } from "../utils/axiosClient";
+import Loading from "../Loading/Loading";
 
 function Portfolio() {
   const [portfolio, setPortfolio] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchData() {
     try {
       const response = await axiosClient.get("/portfolios?populate=*");
       const fetchedData = response.data.data;
 
-      // console.log(fetchedData.gallery.attributes.title);
       const portfolioData = fetchedData.map((item) => {
         return {
           title: item.attributes.title,
@@ -20,8 +21,10 @@ function Portfolio() {
         };
       });
       setPortfolio(portfolioData);
+      setLoading(false);
     } catch (error) {
       console.log("This is the error ", error);
+      setLoading(false);
     }
   }
 
@@ -62,22 +65,29 @@ function Portfolio() {
       </div>
 
       {/* Display portfolio items */}
-      {portfolio.map((item, index) => (
-        <div key={index} className="Portfolio-3 gap">
-          {/* <h1 className="menuHeading">{item.title}</h1> */}
-          <div className="container grid grid-two-column">
-            <div className="Portfolio-3-right-part">
-              <h2 className="Portfolio-3-head">{item.title}</h2>
-              <p className="Portfolio-3-heading">{item.desc}</p>
-            </div>
-            <div className="left-part">
-              <figure className="left-img">
-                <img src={item.imageUrl} alt={item.title} />
-              </figure>
+      {loading ? (
+        // Show loading bar while data is being fetched
+        <div className="loading-bar">
+          <Loading />
+        </div>
+      ) : (
+        portfolio.map((item, index) => (
+          <div key={index} className="Portfolio-3 gap">
+            {/* <h1 className="menuHeading">{item.title}</h1> */}
+            <div className="container grid grid-two-column">
+              <div className="Portfolio-3-right-part">
+                <h2 className="Portfolio-3-head">{item.title}</h2>
+                <p className="Portfolio-3-heading">{item.desc}</p>
+              </div>
+              <div className="left-part">
+                <figure className="left-img">
+                  <img src={item.imageUrl} alt={item.title} />
+                </figure>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
     </>
   );
 }

@@ -4,8 +4,6 @@ import "./Carsusel1.scss";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { axiosClient } from "../utils/axiosClient";
 
-import LoadingBar from "../Loading/Loading";
-
 function Carousel1() {
   const [carouselImages, setCarouselImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // State variable to track loading status
@@ -44,24 +42,20 @@ function Carousel1() {
 
   return (
     <div className="Carousel">
-      {isLoading ? ( // Render the loading bar if data is still loading
-        <LoadingBar />
-      ) : (
-        <Carousel
-          infiniteLoop
-          autoPlay
-          showStatus={false}
-          showArrows={false}
-          interval={2000}
-          showThumbs={false}
-        >
-          {carouselImages.map((imageUrl, index) => (
-            <div key={index} className="box">
-              <img src={imageUrl} alt={`item${index}`} />
-            </div>
-          ))}
-        </Carousel>
-      )}
+      <Carousel
+        infiniteLoop
+        autoPlay
+        showStatus={false}
+        showArrows={false}
+        interval={2000}
+        showThumbs={false}
+      >
+        {carouselImages.map((imageUrl, index) => (
+          <div key={index} className="box">
+            <img src={imageUrl} alt={`item${index}`} />
+          </div>
+        ))}
+      </Carousel>
     </div>
   );
 }
